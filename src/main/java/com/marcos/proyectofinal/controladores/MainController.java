@@ -21,7 +21,7 @@ public class MainController {
 		return "index.html";
 	}
         
-        @GetMapping("/login")
+        @GetMapping("/login/")
 	public String login(ModelMap modelo) {
 		
 		return "login.html";
