@@ -1,6 +1,9 @@
 package com.marcos.proyectofinal.entidades;
 
+import com.marcos.proyectofinal.enumeracion.Variedad;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -8,6 +11,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 public class Articulo {
+
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
@@ -18,7 +22,25 @@ public class Articulo {
     private String foto;
     @ManyToOne
     private Proveedor proveedor;
+    @Enumerated(EnumType.STRING)
+    private Variedad variedad;
+
+    public Variedad getVariedad() {
+        return variedad;
+    }
+
+    public void setVariedad(Variedad variedad) {
+        this.variedad = variedad;
+    }
     private boolean activo;
+
+    public Proveedor getProveedor() {
+        return proveedor;
+    }
+
+    public void setProveedor(Proveedor proveedor) {
+        this.proveedor = proveedor;
+    }
 
     public String getId() {
         return id;
@@ -68,5 +90,9 @@ public class Articulo {
         this.activo = activo;
     }
 
-   
+    @Override
+    public String toString() {
+        return "Articulo{" + "id=" + id + ", nombre=" + nombre + ", precio=" + precio + ", cantidad=" + cantidad + ", foto=" + foto + ", proveedor=" + proveedor + ", activo=" + activo + '}';
+    }
+
 }

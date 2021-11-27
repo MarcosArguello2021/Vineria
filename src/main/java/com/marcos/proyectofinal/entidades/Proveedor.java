@@ -17,8 +17,6 @@ public class Proveedor {
     private String id;
     private String nombre;
     private String correo;
-    @OneToMany(mappedBy = "proveedor", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Articulo> articulos;
     private boolean activo;
 
     public String getId() {
@@ -45,14 +43,6 @@ public class Proveedor {
         this.correo = correo;
     }
 
-    public List<Articulo> getArticulos() {
-        return articulos;
-    }
-
-    public void setArticulos(List<Articulo> articulos) {
-        this.articulos = articulos;
-    }
-
     public boolean isActivo() {
         return activo;
     }
@@ -61,4 +51,10 @@ public class Proveedor {
         this.activo = activo;
     }
 
+    @Override
+    public String toString() {
+        return "Proveedor{" + "id=" + id + ", nombre=" + nombre + ", correo=" + correo + ", activo=" + activo + '}';
+    }
+
+    
 }

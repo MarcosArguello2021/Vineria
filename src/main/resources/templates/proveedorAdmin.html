@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <title>Carga de proveedores</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link th:replace="/fragments/head">
+        <style>
+            html,body{   
+                background-image: url("/img/main.jpg");
+                background-attachment: fixed;
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-position: center;
+                height: 100%;
+                font-family: Raleway;
+            }
+        </style>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+        </style>
+    </head>
+    <body>
+       <header id="header">
+            <div th:replace="/fragments/navbar"></div>
+        </header>
+         <master id="master">
+            <br>
+            <br>
+            <br>
+            <div th:if="${#authorization.expression('hasAnyRole(''ADMIN'')')}" align="center"
+                 class="container m-5 bg-info p-1 text-white bg-opacity-75">
+                <div>
+                    <div th:if="${exito}!=null" class="card text-white bg-success mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Exito</h5>
+                            <p class="card-text" th:text="${exito}"></p>
+                        </div>
+                    </div>
+                    <div th:if="${error}!=null" class="card text-white bg-danger mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Error</h5>
+                            <p class="card-text" th:text="${error}"></p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h1 align="center" class="display-5">Formulario carga de Proveedores</h1>
+                    <form th:object="${proveedor}" th:action="@{/proveedor/registro}" method="POST">
+                        <div class="mb-0">
+                            <span th:if="${proveedor.id !=null}"><input type="text" th:field="*{id}" readonly><br/></span>
+                            <div class="mb-0">
+                                <label for="nombre" class="form-label">Nombre/Razón Social Proveedor</label>
+                                <input type="text" class="form-control" th:field="*{nombre}">
+                            </div>
+                            <div class="mb-0">
+                                <label for="Correo" class="form-label">Correo/email Proveedor</label>
+                                <input type="email" class="form-control" th:field="*{correo}">
+                            </div>
+                            <br>
+                            <button type="submit" class="btn btn-primary">Enviar registro</button>
+                        </div>
+                        <br>
+                    </form>
+                </div>
+            </div>
+        </master>
+        <div th:replace="/fragments/bootjs"></div>
+    </body>
+</html>

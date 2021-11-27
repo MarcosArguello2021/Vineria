@@ -1,0 +1,23 @@
+<master id="master" >
+
+    <div class="container"  >
+        <br>
+        <br>
+        <h2 style="font-family: Raleway; color: #fff" class="text-center">Productos Destacados</h2>
+        <br>
+        <div class="row flow-offset-1 card clean-card text-center" style="background-color: window">
+            <div th:each="articulo : ${articulos}">
+                <div class="col-xs-6 col-md-4 clean-card ">
+                    <div class="product tumbnail thumbnail-3"><a href="#"><img th:src="${articulo.foto}"
+                                                                               style="width: 29rem; height: 28rem;" /></a>
+                        <div class="caption">
+                            <h5><a href="/articulo/descripcion" th:text="${articulo.nombre}"></a></h5>
+                          <p class="price sale">$ <span th:text="${articulo.precio}"></span>0</p>  
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</master>

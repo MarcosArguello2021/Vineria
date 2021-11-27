@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <title>Acerca de nosotros</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link th:replace="/fragments/head">
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+        </style>
+        <style>
+            html,body{   
+                background-image: url("");
+                background-attachment: fixed;
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-position: center;
+                height: 90%;
+                font-family: Raleway;
+            }
+            .delimitador{
+                width:560px;
+                margin:auto;
+            }
+            /* El contenedor con el padding-top crea el tamaño del vídeo */
+            .contenedor{
+                height:0px;
+                width:100%;
+                max-width:560px; /* Así establecemos el ancho máximo (si lo queremos) */
+                padding-top:56.25%; /* Relación: 16/9 = 56.25% */
+                position:relative;
+            }
+            /* El iframe se adapta al tamaño del contenedor */
+            iframe{
+                position:absolute;
+                height:100%;
+                width:100%;
+                top:0px;
+                left:0px;
+            }
+        </style>
+
+    </head>
+    <body>
+        <header id="header">
+            <div th:replace="/fragments/navbar"></div>
+        </header>
+        
+        <master style="align-content: center">
+            <br>
+            <br>
+            <br>
+            <main class="page" >
+                <section class="clean-block about-us bg-transparent">
+
+                    <div class="container">
+
+                        <div class="block-heading justify-content-center line-height: 200%" style="color: #051d1d" >
+                            <h2 class="text-center">Vineria Marcos</h2>
+                            <div th:replace="/fragments/video"></div>
+                            <p>Convencidos de la calidad la uva de nuestros productos, es que decidimos comercializar, con el fin de poder mostrar los productos obtenidos a partir de una gran colección de las principales bodegas de Mendoza. El espíritu creador se refleja en nuestros vinos que responden a los más altos estándares de calidad exigidos por la enología contemporánea.
+                                "Este proyecto comienza con el sueño de ser una Finca proveedora de uva para vinos de alta gama. Al principio no fue fácil, fue todo un desafío, la finca se encontraba en una zona virgen y originaria, el terreno era un monte con especies nativas, principalmente colonizado por jarilla, algarrobos y cactus, todas especies que se desarrollan en zonas áridas. Hoy en día, luego de jornadas de trabajo de sol a sol, podemos estar orgullosos de haber plantado 110 de las 200 hectáreas con vid de alta calidad y almendros gracias al cuidado de excelencia que realizamos."
+                            </p>
+                        </div>
+
+                        <div class="row justify-content-center" style="color: #000">
+                            <div class="col-sm-6 col-lg-4">
+                                <div class="card clean-card text-center"><img class="card-img-top w-100 d-block" src="/img/avatar1.jpg">
+                                    <div class="card-body info">
+                                        <h4 class="card-title">Marcos Argüello</h4>
+                                        <p class="card-text">Gerente Regional</p>
+                                        <div class="icons"><a href="#"><i class="icon-social-facebook"></i></a><a href="#"><i class="icon-social-instagram"></i></a><a href="#"><i class="icon-social-twitter"></i></a></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-lg-4">
+                                <div class="card clean-card text-center"><img class="card-img-top w-100 d-block" src="/img/avatar2.jpg">
+                                    <div class="card-body info">
+                                        <h4 class="card-title">Matias Cela Diaz</h4>
+                                        <p class="card-text">Gerente de ventas</p>
+                                        <div class="icons"><a href="#"><i class="icon-social-facebook"></i></a><a href="#"><i class="icon-social-instagram"></i></a><a href="#"><i class="icon-social-twitter"></i></a></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-lg-4">
+                                <div class="card clean-card text-center"><img class="card-img-top w-100 d-block" src="/img/avatar3.jpg">
+                                    <div class="card-body info">
+                                        <h4 class="card-title">Antonella Rinaldi</h4>
+                                        <p class="card-text">Gerenta Departamento de IT</p>
+                                        <div class="icons"><a href="#"><i class="icon-social-facebook"></i></a><a href="#"><i class="icon-social-instagram"></i></a><a href="#"><i class="icon-social-twitter"></i></a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </master>
+        <div th:replace="/fragments/bootjs"></div>
+    </body>
+</html>
