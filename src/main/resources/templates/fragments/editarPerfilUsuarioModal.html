@@ -1,0 +1,34 @@
+<div class="modal fade" th:each="usuario : ${usuarios}" th:attr="id=${'editModal' + usuario.id}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+               <form th:object="${usuario}" th:action="@{/usuario/editar}" method="POST">
+                <div class="modal-content" >
+                    <div class="modal-header">
+                        <h4 class="modal-title" align="center" id="staticBackdropLabel">Editar datos del Perfil</h4>
+                    </div>
+                    <div class="modal-body">
+                        <input id="id" name="id" type="hidden" th:value="${usuario.id}">
+                        <div class="form-group">
+                        <label class="form-label">Nombre:</label>
+                        <input class="form-control" type="text" th:value="${usuario.nombre}" name="nombre"></input>
+                        </div>
+                        <div class="form-group">
+                        <label class="form-label">Apellido:</label>
+                        <input class="form-control" type="text" th:value="${usuario.apellido}" name="apellido"></input>
+                        </div>
+                        <div class="form-group">
+                        <label class="form-label">Correo:</label>
+                        <input class="form-control" type="text" th:value="${usuario.correo}" name="correo"></input>
+                        </div>
+                        <div class="form-group">
+                        <label class="form-label">Password:</label>
+                        <input class="form-control" type="password" name="password"></input>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" >Cerrar</button>
+                        <button type="summit" class="btn btn-warning">Guardar</button>
+                    </div>
+                </div>
+               </form>
+            </div>
+</div>

@@ -5,48 +5,37 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import org.hibernate.annotations.GenericGenerator;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Articulo {
 
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String nombre;
     private Double precio;
     private Integer cantidad;
     private String foto;
-    @ManyToOne
+    @OneToOne
+    private Foto imagen;
+    @JoinColumn(name = "fk_proveedor", nullable = false)
+    @ManyToOne()
     private Proveedor proveedor;
     @Enumerated(EnumType.STRING)
     private Variedad variedad;
-
-    public Variedad getVariedad() {
-        return variedad;
-    }
-
-    public void setVariedad(Variedad variedad) {
-        this.variedad = variedad;
-    }
+    private String descripcion;
     private boolean activo;
 
-    public Proveedor getProveedor() {
-        return proveedor;
-    }
-
-    public void setProveedor(Proveedor proveedor) {
-        this.proveedor = proveedor;
-    }
-
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -82,6 +71,38 @@ public class Articulo {
         this.foto = foto;
     }
 
+    public Foto getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(Foto imagen) {
+        this.imagen = imagen;
+    }
+
+    public Proveedor getProveedor() {
+        return proveedor;
+    }
+
+    public void setProveedor(Proveedor proveedor) {
+        this.proveedor = proveedor;
+    }
+
+    public Variedad getVariedad() {
+        return variedad;
+    }
+
+    public void setVariedad(Variedad variedad) {
+        this.variedad = variedad;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
     public boolean isActivo() {
         return activo;
     }
@@ -90,9 +111,13 @@ public class Articulo {
         this.activo = activo;
     }
 
+
+
     @Override
     public String toString() {
-        return "Articulo{" + "id=" + id + ", nombre=" + nombre + ", precio=" + precio + ", cantidad=" + cantidad + ", foto=" + foto + ", proveedor=" + proveedor + ", activo=" + activo + '}';
+        return "Articulo{" + "id=" + id + ", nombre=" + nombre + ", precio=" + precio + ", cantidad=" + cantidad + ", foto=" + foto + ", imagen=" + imagen + ", proveedor=" + proveedor + ", variedad=" + variedad + ", descripcion=" + descripcion + ", activo=" + activo + '}';
     }
+
+
 
 }

@@ -1,0 +1,31 @@
+<div class="modal fade" th:each="proveedor : ${proveedores}" th:attr="id=${'editModal' + proveedor.id}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+               <form th:object="${proveedor}" th:action="@{/proveedor/editar/__${proveedor.id}__}" method="POST">
+                <div class="modal-content" >
+                    <div class="modal-header">
+                        <h4 class="modal-title" align="center" id="staticBackdropLabel">Editar datos del Proveedor</h4>
+                    </div>
+                    <div class="modal-body">
+                        <input id="id" type="hidden" name="id" th:value="${proveedor.id}">
+                        <div class="form-group">
+                        <label class="form-label">Nombre/Razón Social</label>
+                        <input class="form-control" type="text" th:value="${proveedor.nombre}" name="nombre"></input>
+                        </div>
+                        <div class="form-group">
+                        <label class="form-label">CUIT:</label>
+                        <input class="form-control" type="text" th:value="${proveedor.cuit}" name="cuit"></input>
+                        </div>
+                        <div class="form-group">
+                        <label class="form-label">Correo/Email:</label>
+                        <input class="form-control" type="text" th:value="${proveedor.correo}" name="correo"></input>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" >Cerrar</button>
+                        <button type="summit" class="btn btn-warning">Guardar</button>
+                    </div>
+                </div>
+               </form>
+            </div>
+</div>
+

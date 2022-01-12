@@ -2,7 +2,6 @@ package com.marcos.proyectofinal.servicios;
 
 import com.marcos.proyectofinal.entidades.Articulo;
 import com.marcos.proyectofinal.entidades.Carrito;
-import com.marcos.proyectofinal.entidades.Proveedor;
 import com.marcos.proyectofinal.excepciones.WebException;
 import com.marcos.proyectofinal.repositorios.CarritoRepositorio;
 import com.marcos.proyectofinal.repositorios.UsuarioRepositorio;

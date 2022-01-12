@@ -3,6 +3,6 @@ package com.marcos.proyectofinal.enumeracion;
 
 
 public enum Variedad {
-    TINTO, BLANCO, ESPUMANTES, ORGANICOS;
+    TINTO, BLANCO, ESPUMANTES, ORGANICOS, BLEND;
 }
 

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Vineria Marcos</title>
+        <link th:replace="/fragments/head">
+        <style>
+            html,
+            body {
+                background-image: url("/img/main.jpg");
+                background-attachment: fixed;
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-position: center;
+                height: 100%;
+                font-family: Raleway;
+            }
+        </style>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+        </style>
+        <style>
+            .container{
+                width:100%;
+                padding-right:13px;
+                padding-left:13px;
+                margin-right:auto;
+                margin-left:auto
+
+            }
+        </style>
+    </head>
+    <body>
+        <header id="header">
+            <div th:replace="/fragments/navbar"></div>
+        </header>
+
+    <master id="master">
+        <br>
+        <br>
+        <br>
+        <div th:if="${#authorization.expression('hasAnyRole(''ADMIN'')')}" align="center"
+             class="container bg-info text-white bg-opacity-75"> 
+            <h1 align="center" class="display-5">Editar Articulos</h1>
+            <div class="bg-light">
+                <div class="container">
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Precio</th>
+                                <th scope="col">Cantidad</th>
+                                <th scope="col">Proveedor</th>
+                                <th scope="col">Variedad</th>
+                                <th scope="col">¿Activo?</th>
+                                <th scope="col">Acciones</th>								
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="articulo: ${articulos}">
+                                <th scope="row" th:text="${articulo.id}"></th>
+                                <td scope="row"  th:text="${articulo.nombre}"></td>
+                                <td scope="row" th:text="${articulo.precio}"></td>
+                                <td scope="row" th:text="${articulo.cantidad}"></td>    
+                                <td scope="row" th:text="${articulo.proveedor.nombre}"></td>    
+                                <td scope="row" th:text="${articulo.variedad}"></td>
+                                <td  style="text-align: center">
+                                    <i th:if="${articulo.activo}" class="fa fa-circle text-success"></i>
+                                    <i th:unless="${articulo.activo}" class="fa fa-circle" style="color:red;"></i>
+                                </td>   
+                                <td style="text-align: center">
+                                    <a type="button" class="btn btn-warning"
+                                       data-toggle="modal" 
+                                       th:attr="data-target=${'#editModal'+articulo.id}" data-proveedor="${articulo}">Modificar</a>
+                                    <a type="button" class="btn btn-danger" 
+                                       data-toggle="modal"
+                                       th:attr="data-target=${'#eliminarModal'+articulo.id}" data-proveedor="${articulo}">Eliminar</a>
+                                    <a th:href="@{/articulo/alta/__${articulo.id}__}"><i class="fa fa-arrow-up"></i></a> 
+                                    <a th:href="@{/articulo/baja/__${articulo.id}__}"><i class="fa fa-ban"></i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <a class="btn btn-secondary btn-lg btn-block" th:href="@{/articulo/registro}" role="button">Agregar nuevo proveedor
+                </a></button>
+            </div>
+        </div>
+    </master>  
+     <div th:replace="/fragments/editarPerfilUsuarioModal"></div>
+    <div th:replace="/fragments/editarArticuloModal"></div>
+    <div th:replace="/fragments/confirmarArticuloModal"></div>
+    <div th:replace="/fragments/bootjs"></div>
+    <footer th:replace="/fragments/footer"></footer>
+</body>
+</html>

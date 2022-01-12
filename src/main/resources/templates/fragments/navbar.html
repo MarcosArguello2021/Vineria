@@ -1,12 +1,6 @@
 <nav class="navbar navbar-default navbar-expand-lg navbar-light" style="background-color: #421440;">
     <div class="navbar-header">
         <a class="navbar-brand" href="/">Vineria<b> Marcos Argüello</b></a>  		
-        <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
-            <span class="navbar-toggler-icon"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
     </div>
     <!-- Collection of nav links, forms, and other content for toggling -->
     <div id="navbarCollapse" class="collapse navbar-collapse">
@@ -19,8 +13,9 @@
                 <ul class="dropdown-menu">
 
                     <form th:action="@{/articulo/listar}" method="POST">
-                        <li><button class="btn btn-link" type="submit" name="variedad" value="TINTO">Tintos</button></li>
+                        <li><button class="btn btn-link" type="submit" name="variedad" value="BLEND">Blend</button></li>
                         <li><button class="btn btn-link" type="submit" name="variedad" value="BLANCO">Blancos</button></li>
+                        <li><button class="btn btn-link" type="submit" name="variedad" value="TINTO">Tintos</button></li>
                         <li><button class="btn btn-link" type="submit" name="variedad" value="ESPUMANTES">Espumantes</button></li>
                         <li><button class="btn btn-link" type="submit" name="variedad" value="ORGANICOS">Orgánicos/Veganos</button></li>
                     </form>    
@@ -29,10 +24,10 @@
             </li>
             <li class="active"><a href="/catalogo">Catalogo</a></li>
             <li>
-               <a data-toggle="dropdown" class="dropdown-toggle" href="#" >Contáctenos</a>
+                <a data-toggle="dropdown" class="dropdown-toggle" href="#" >Contáctenos</a>
                 <ul class="dropdown-menu form-wrapper">					
                     <li>
-                        <form action="/mensaje" method="post"><input type="hidden" name="_csrf" value="c6fd0a5e-56f4-45f7-a0df-717099f616bd"/>
+                        <form action="/mailsender" method="post">
                             <p class="hint-text">Llena los siguientes campos para enviarnos su consulta</p>
                             <div class="form-group">
                                 <input type="text" class="form-control" placeholder="Nombre" name="nombre" required="required">
@@ -44,10 +39,9 @@
                                 <input type="email" class="form-control" placeholder="Correo" name="correo" required="required">
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Escriba su consulta" name="mensaje" required="required">
+                                <textarea name="mensaje" rows="7" cols="25" required="required" placeholder="Escriba su consulta"></textarea>
                             </div>
-                            
-                           <input type="submit" class="btn btn-primary btn-block" value="Enviar">
+                            <input type="submit" class="btn btn-primary btn-block" value="Enviar">
                         </form>
                     </li>
                 </ul>
@@ -56,22 +50,22 @@
                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">Vista Administrador <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li ><a href="/proveedor/registro">Cargar Proveedor</a></li>
-                    <li ><a href="#">Listar Proveedor</a></li>
+                    <li ><a href="/proveedor/listar">Listar Proveedor</a></li>
                     <li ><a href="/articulo/registro">Cargar Articulos</a></li>
-                    <li ><a href="#">Listar Articulos</a></li>
+                    <li ><a href="/articulo/listar">Listar Articulos</a></li>
                 </ul>
             </li>
-        <form class="navbar-form form-inline" th:action="@{/articulo/buscar}" method="POST" >
-            <div class="input-group search-box">
+            <form class="navbar-form form-inline" th:action="@{/articulo/buscar}" method="POST" >
+                <div class="input-group search-box">
 
-                <input type="search" name="nombre" class="form-control" placeholder="Buscar vino">
-                <span class="input-group-addon"><i class="material-icons">&#xE8B6;</i></span>
-            </div>
-        </form>
-        
-        
+                    <input type="search" name="nombre" class="form-control" placeholder="Buscar vino">
+                    <span class="input-group-addon"><i class="material-icons">&#xE8B6;</i></span>
+                </div>
+            </form>
+
+
         </ul>
-        
+
         <ul class="nav navbar-nav navbar-right">			
             <li sec:authorize="!isAuthenticated()">
                 <a data-toggle="dropdown" class="dropdown-toggle" href="#" >Login</a>
@@ -120,16 +114,27 @@
                                 <input type="password" class="form-control" placeholder="Confirmar Password" name="password" required="required">
                             </div>
                             <div class="form-group">
-                                <label class="checkbox-inline"><input type="checkbox" required="required"> Acepto los <a href="#">Terminos &amp; Condiciones</a></label>
+                                <label class="checkbox-inline"><input type="checkbox" required="required"> Acepto los <a href="/terminos">Terminos &amp; Condiciones</a></label>
                             </div>
                             <input type="submit" class="btn btn-primary btn-block" value="Registrarse">
                         </form>
                     </li>
                 </ul>
             </li>
-            <li>
-                <a class="btn btn-primary get-started-btn" href="/logout" th:if="${#authorization.expression('isAuthenticated()')}" align="center">Cerrar Sesión</a>
+            <li th:if="${#authorization.expression('isAuthenticated()')} " th:each="usuario: ${usuarios}">
+                <a href="#" data-toggle="dropdown" class="btn btn-primary dropdown-toggle get-started-btn"  align="center" 
+                   th:if="${#authentication.getPrincipal().getUsername()} == ${usuario.correo}" th:text="${usuario.nombre} + ' ' + ${usuario.apellido}"></a>
+
+                <ul class="dropdown-menu">					
+                    <li >
+                        <a th:if="${usuario.correo} == ${#authentication.getPrincipal().getUsername()}" type="button" class="btn"  
+                           data-toggle="modal" 
+                           th:attr="data-target=${'#editModal'+usuario.id}" data-usuario="${usuario}">Modificar Perfil</a>
+                    </li>
+                    <li >
+                        <a class="btn " href="/logout" >Cerrar Sesión</a>
+                    </li>
+                </ul>
             </li>
-        </ul>
     </div>
 </nav>

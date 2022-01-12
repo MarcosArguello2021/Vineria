@@ -28,11 +28,11 @@
 .navbar .navbar-brand, .navbar .navbar-brand:hover, .navbar .navbar-brand:focus {
     padding-left: 0;
     font-size: 15px;
-    padding-right: 50px;
+    padding-right: 20px;
 }
 .navbar .navbar-brand b {
     font-weight: bold;
-    color: #cc0000;		
+    color: #00cccc;		
 }
 .navbar .form-inline {
     display: inline-block;
@@ -318,11 +318,7 @@ img {
     margin-left: 10.8%;
 }
 
-@media (max-width: 1199px) {
-    .single-product .caption * + .price {
-        margin-left: 7.8%;
-    }
-}
+
 
 .single-product .caption * + .quantity {
     margin-left: 26px;
@@ -380,9 +376,9 @@ img {
 
 .price {
     display: inline-block;
-    font-size: 15px;
+    font-size: 20px;
     font-family: Montserrat, sans-serif;
-    font-weight: 700;
+    font-weight: 800;
     letter-spacing: 0.02em;
     color: #2b2f3e;
 }
@@ -477,7 +473,7 @@ img {
 }
 
 .header-content h1 {
-    font-size: 45px;
+    font-size: 30px;
     margin-bottom: 0;
     font-family: Lobster;
 }
@@ -494,15 +490,136 @@ img {
     padding-bottom: 2rem;
     font-size: 1.8rem;
 }
+
+.box-carga{
+    width: 40%;
+}
 #header{
-  position: fixed;
-  width: 100%;
-  z-index: 1000;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
 }
 
 #master{
-padding:100px;
+    padding:30px;
+
 }
+
+
+.available {
+    margin-top: 19px
+}
+
+.available_title {
+    font-size: 16px;
+    color: #14344c;
+    font-weight: 400;
+    text-align: start;
+}
+
+.available_title span {
+    font-weight: 700
+}
+
+.footer .page-footer {
+    position: relative;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.fa {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: 18px;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.mt-20 {
+    margin-top: 20px;
+}
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+    display: block;
+}
+
+.social-links {
+    margin-top: 10px;
+    font-size: 16px;
+
+}
+
+.copy-right p {
+    color: #ffffff;
+    margin-top: 5px;
+    font-size: 12px;
+    font-weight: 300;
+    letter-spacing: 2px;
+}
+
+.copy-right a {
+    color:  #ffffff;
+    font-size: 12px;
+    letter-spacing: 0.5em;
+}
+
+.alt-font {
+    font-family: 'Dosis', arial, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+}
+
+.modal-dialog{
+    background-color: window;
+    margin-top:20px;
+    border:0;
+
+}
+.modal-header{
+    background-color: #4676bd;
+    color: #ffffff;
+}
+
+.modal-footer{
+    background-color: #9999ff;
+}
+.table th {
+    text-align: center;
+    border: solid #cccccc;
+    border-width: 1px 1;
+}
+
+.table tr {
+    border: solid #cccccc;
+    border-width: 1px 1;
+}
+
+.table td{
+    border: solid #cccccc;
+    border-width: 1px 1;
+}
+.table thead{
+    background-color: #455a64;
+    color: #ffffff;
+}
+.table{
+    width:95%;
+    margin-bottom:1rem;
+    border-width: 1px 1;
+    color:#14344c;
+}
+
+.delimitador{
+    width:560px;
+    margin:auto;
+}
+
+
 
 @media (max-width: 960px) {
     .content {

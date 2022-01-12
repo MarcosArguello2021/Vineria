@@ -1,0 +1,58 @@
+<div class="modal fade" th:each="articulo : ${articulos}" th:attr="id=${'editModal' + articulo.id}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form th:object="${articulo}" th:action="@{/articulo/editar}" method="POST" enctype="multipart/form-data">
+            <div class="modal-content" >
+                <div class="modal-header">
+                    <h4 class="modal-title" align="center" id="staticBackdropLabel">Editar datos del Articulo</h4>
+                </div>
+                <div  class="modal-body">
+                    <input id="id" name="id" type="hidden" th:value="${articulo.id}">
+                    <div class="form-group">
+                        <label class="form-label">Nombre</label>
+                        <input class="form-control" type="text" th:value="${articulo.nombre}" name="nombre" required="required"></input>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Descripción </label>
+
+                        <textarea class="form-control" th:value="${articulo.descripcion}" th:text="${articulo.descripcion}" name="descripcion" required="required"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Precio</label>
+                        <input class="form-control" type="number" th:value="${articulo.precio}" name="precio" required="required"></input>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Cantidad existente:</label>
+                        <input class="form-control" type="text" th:value="${articulo.cantidad}" name="cantidad" required="required"></input>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">URL de la foto</label>
+                        <input class="form-control" type="text" th:value="${articulo.foto}" name="foto" required="required"></input>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Imagen</label>
+                       <input type="file" name="archivo" th:value="${archivo}"/>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Nombre Proveedor</label>
+                        <select th:field="${articulo.proveedor.id}" class="form-control" required>
+                            <option th:value="${articulo.proveedor.id}" th:text="${articulo.proveedor.nombre}" required="required"></option>
+                            <option th:each="proveedor : ${proveedores}" th:value="${proveedor.id}" th:text="${proveedor.nombre}" required="required">
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Variedad</label>
+                        <select class="form-control" th:field="${articulo.variedad}">
+                            <option th:value="${articulo.variedad}" th:text="${articulo.variedad}" required="required"></option>
+                             <option th:each="variedad : ${T(com.marcos.proyectofinal.enumeracion.Variedad).values()}" th:value="${variedad}"
+                                    th:text="${variedad}"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" >Cerrar</button>
+                    <button type="summit" class="btn btn-warning">Guardar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -11,15 +11,24 @@
             @import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
         </style>
         <style>
-            @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@800&display=swap');
+            html,body {
+                background-image: url("/img/main.jpg");
+                background-attachment: fixed;
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-position: center;
+                height: 100%;
+                font-family: Raleway;
+            }
         </style>
+
     </head> 
-    <body style="font-family: EB+Garamond">
+    <body >
         <header id="header">
             <div th:replace="/fragments/navbar"></div>
         </header>
     <master th:replace="/fragments/mainvideo"></master>
-
+    <div th:replace="/fragments/editarPerfilUsuarioModal"></div>
     <div th:replace="/fragments/bootjs"></div>
 </body>
 </html>    

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,20 +15,87 @@
                 background-repeat: no-repeat;
                 background-position: center;
                 height: 100%;
+                font-family: Raleway;
             }
         </style>
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
         </style>
     </head>
-
     <body>
-      <header id="header">
+        <header id="header">
             <div th:replace="/fragments/navbar"></div>
-      </header>
+        </header>
 
+    <master id="master">
+        <br>
+        <br>
+        <br>
+        <div th:if="${#authorization.expression('hasAnyRole(''ADMIN'')')}" align="center"
+             class="container bg-info text-white bg-opacity-75">
+            <div>
+                <div th:if="${exito}!=null" class="card text-white bg-success mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Exito</h5>
+                        <p class="card-text" th:text="${exito}"></p>
+                    </div>
+                </div>
+                <div th:if="${error}!=null" class="card text-white bg-danger mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Error</h5>
+                        <p class="card-text" th:text="${error}"></p>
+                    </div>
+                </div>
+            </div>  
+            <h1 align="center" class="display-5">Editar proveedores</h1>
+            <div class="album py-5 bg-light">
+                <div class="container">
 
+                    <table class="table">
+                        <thead>
+                            <tr >
+                                <th scope="col">ID</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">CUIT</th>
+                                <th scope="col">Correo</th>
+                                <th scope="col">¿Activo?</th>
+                                <th scope="col">Acciones</th>								
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="proveedor: ${proveedores}">
+                                <th scope="row" th:text="${proveedor.id}"></th>
+                                <td th:text="${proveedor.nombre}"></td>
+                                <td th:text="${proveedor.cuit}"></td>
+                                <td th:text="${proveedor.correo}"></td>
+                                <td  style="text-align: center">
+                                    <i th:if="${proveedor.activo}" class="fa fa-circle text-success"></i>
+                                    <i th:unless="${proveedor.activo}" class="fa fa-circle" style="color:red;"></i>
+                                </td>
+                                <td style="text-align: center">
+                                    <a type="button" class="btn btn-warning" 
+                                       data-toggle="modal" 
+                                       th:attr="data-target=${'#editModal'+proveedor.id}" data-proveedor="${proveedor}">Modificar</a>
+                                    <a type="button" class="btn btn-danger" 
+                                       data-toggle="modal"
+                                       th:attr="data-target=${'#eliminarModal'+proveedor.id}" data-proveedor="${proveedor}">Eliminar</a>
+                                    <a th:href="@{/proveedor/alta/__${proveedor.id}__}"><i class="fa fa-arrow-up"></i></a> 
+                                    <a th:href="@{/proveedor/baja/__${proveedor.id}__}"><i class="fa fa-ban"></i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <a class="btn btn-secondary btn-lg btn-block" th:href="@{/proveedor/registro}" role="button">Agregar nuevo proveedor
+                </a></button>
+            </div>
+        </div>
 
+    </master> 
+     <div th:replace="/fragments/editarPerfilUsuarioModal"></div>
+    <div th:replace="/fragments/editarProveedorModal"></div>
+    <div th:replace="/fragments/confirmarProveedorModal"></div>
+    <footer th:replace="/fragments/footer"></footer>
     <div th:replace="/fragments/bootjs"></div>
 </body>
 </html>

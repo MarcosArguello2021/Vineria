@@ -1,29 +1,27 @@
 package com.marcos.proyectofinal.entidades;
 
-import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import org.hibernate.annotations.GenericGenerator;
+
 
 @Entity
 public class Proveedor {
 
-    @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
-    private String id;
+@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String nombre;
+    private Long cuit;
     private String correo;
     private boolean activo;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -51,10 +49,17 @@ public class Proveedor {
         this.activo = activo;
     }
 
-    @Override
-    public String toString() {
-        return "Proveedor{" + "id=" + id + ", nombre=" + nombre + ", correo=" + correo + ", activo=" + activo + '}';
+    public Long getCuit() {
+        return cuit;
     }
 
-    
+    public void setCuit(Long cuit) {
+        this.cuit = cuit;
+    }
+
+    @Override
+    public String toString() {
+        return "Proveedor{" + "id=" + id + ", nombre=" + nombre + ", cuit=" + cuit + ", correo=" + correo + ", activo=" + activo + '}';
+    }
+
 }

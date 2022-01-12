@@ -24,8 +24,7 @@ public class ConfiguracionesSeguridad extends WebSecurityConfigurerAdapter {
 		auth.userDetailsService(usuarioServicio).
 		passwordEncoder(new BCryptPasswordEncoder());
 	}
-	
-	
+		
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
@@ -36,7 +35,7 @@ public class ConfiguracionesSeguridad extends WebSecurityConfigurerAdapter {
 						.loginProcessingUrl("/logincheck")
 						.usernameParameter("correo")
 						.passwordParameter("password")
-						.defaultSuccessUrl("/loginsuccess")
+     						.defaultSuccessUrl("/loginsuccess")
 						.failureUrl("/login?error=error")
 						.permitAll()
 				.and().logout()

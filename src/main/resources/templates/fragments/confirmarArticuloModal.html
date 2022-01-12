@@ -1,0 +1,23 @@
+<div class="modal fade" th:each="articulo : ${articulos}" th:attr="id=${'eliminarModal' + articulo.id}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+               <form th:object="${articulo}" th:action="@{/articulo/eliminar/__${articulo.id}__}" method="POST">
+                <div class="modal-content" >
+                    <div class="modal-header">
+                        <h4 class="modal-title" align="center" id="staticBackdropLabel">Confirmar operación</h4>
+                    </div>
+                    <div class="modal-body">
+                        <input id="id" name="id" type="hidden" th:value="${articulo.id}">
+                        <div >
+                        <h4 align="center">¿Está seguro que desea eliminar el siguiente registro?</h4>
+                        <h3 th:text="${articulo.nombre}"></h3>
+                        </div>
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" >Cancela</button>
+                        <button type="summit" class="btn btn-danger">Confirma</button>
+                    </div>
+                </div>
+               </form>
+            </div>
+</div>

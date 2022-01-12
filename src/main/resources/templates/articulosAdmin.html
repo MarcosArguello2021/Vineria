@@ -27,74 +27,86 @@ and open the template in the editor.
         </style>
     </head> 
     <body>
-       <header id="header">
+        <header id="header">
             <div th:replace="/fragments/navbar"></div>
         </header>
-        
-        <master id="master">
-            <br>
-            <br>
-            <br>
-            <div th:if="${#authorization.expression('hasAnyRole(''ADMIN'')')}" align="center"
-                 class="container m-5 bg-info p-1 text-white bg-opacity-75">
-                <div>
-                    <div th:if="${exito}!=null" class="card text-white bg-success mb-3">
-                        <div class="card-body">
-                            <h5 class="card-title">Exito</h5>
-                            <p class="card-text" th:text="${exito}"></p>
-                        </div>
-                    </div>
-                    <div th:if="${error}!=null" class="card text-white bg-danger mb-3">
-                        <div class="card-body">
-                            <h5 class="card-title">Error</h5>
-                            <p class="card-text" th:text="${error}"></p>
-                        </div>
-                    </div>
-                </div>  
-                <h1 align="center" class="display-5">Formulario carga de Articulos</h1>
-                <form th:action="@{/articulo/registro}" method="POST">
-                    <div>
-                        <div class="mb-0">
-                            <label for="nombre" class="form-label">Nombre Producto</label>
-                            <input type="text" class="form-control" name="nombre" autocomplete="off" th:value="${nombre}" required>
-                        </div>
-                        <div class="mb-0">
-                            <label for="Precio" class="form-label">Precio del artciulo</label>
-                            <input type="number" class="form-control" name="precio" autocomplete="off" th:value="${precio}" required>
-                        </div>
-                        <div class="mb-0">
-                            <label for="cantidad" class="form-label">Cantidad existente</label>
-                            <input type="number" class="form-control" name="cantidad" autocomplete="off" th:value="${cantidad}" required>
-                        </div>
-                        <div class="mb-0">
-                            <label for="URLfoto" class="form-label">URL de foto producto</label>
-                            <input type="text" class="form-control" name="foto" autocomplete="off" th:value="${foto}" required>
-                        </div>
-                        <div class="mb-0">
-                            <label for="Proveedor" class="form-label">Nombre Proveedor</label>
-                            <select name="proveedor" class="form-control" required>
-                                <option value=""> -----------Seleccione un proveedor ó cree uno nuevo------------- </option>
-                                <option th:each="proveedor : ${proveedores}" th:value="${proveedor.id}" th:text="${proveedor.nombre}">
-                            </select>
 
-                            <div align="left">
-                                <a th:href="@{/proveedor/registro}" class="btn btn-secondary">Crear Proveedor Nuevo</a>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>Variedad</label>
-                            <select class="form-control" name="variedad">
-                                <option th:each="variedad : ${T(com.marcos.proyectofinal.enumeracion.Variedad).values()}" th:value="${variedad}"
-                                        th:text="${variedad}"></option>
-                            </select>
-                        </div>
-                        <br>
-                        <button type="submit" class="btn btn-primary">Enviar registro</button>
+    <master id="master">
+        <br>
+        <br>
+        <br>
+        <div th:if="${#authorization.expression('hasAnyRole(''ADMIN'')')}" align="center"
+             class="container box-carga bg-info text-white">
+            <div>
+                <div th:if="${exito}!=null" class="card text-white bg-success mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Exito</h5>
+                        <p class="card-text" th:text="${exito}"></p>
                     </div>
-                    <br> 
-                </form>
-            </div>
-        </master>
-        <div th:replace="/fragments/bootjs"></div>
-    </body>
+                </div>
+                <div th:if="${error}!=null" class="card text-white bg-danger mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Error</h5>
+                        <p class="card-text" th:text="${error}"></p>
+                    </div>
+                </div>
+            </div>  
+            <h1 align="center" class="display-5">Formulario carga de Artículos</h1>
+            <form th:object="${articulo}" th:action="@{/articulo/registro}" method="POST" enctype="multipart/form-data">
+                <div>
+                    <div class="form-group">
+                        <label for="nombre"  class="form-label">Nombre</label>
+                        <input type="text" class="form-control" th:field="*{nombre}" autocomplete="off" th:value="${nombre}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="descripcion" class="form-label" input pattern=".{3,}" required title="Minimo 3 caracteres" maxlength="430">Descripción</label>
+                        <input type="text" class="form-control" th:field="*{descripcion}" autocomplete="off" th:value="${descripcion}" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Precio" class="form-label">Precio</label>
+                        <input type="number" class="form-control" th:field="*{precio}" autocomplete="off" th:value="${precio}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cantidad" class="form-label">Cantidad existente</label>
+                        <input type="number" class="form-control" th:field="*{cantidad}" autocomplete="off" th:value="${cantidad}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="URLfoto" class="form-label">URL de foto del artículo</label>
+                        <input type="text" class="form-control" th:field="*{foto}" autocomplete="off" th:value="${foto}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="imagen" class="form-label">Subir foto del artículo</label>
+                        <input type="file" class="form-control bg-dark text-white" name="archivo" th:value="${archivo}" id="file"/><br>
+                    </div>
+                    <div class="form-group">
+                        <label for="Proveedor" class="form-label">Nombre Proveedor</label>
+                        <select th:field="*{proveedor.id}" class="form-control" required>
+                            <option value=""> -----------Seleccione un proveedor ó cree uno nuevo------------- </option>
+                            <option th:each="proveedor : ${proveedores}" th:value="${proveedor.id}" th:text="${proveedor.nombre}">
+                        </select>
+
+                        <div align="left">
+                            <a th:href="@{/proveedor/registro}" class="btn btn-secondary">Crear Proveedor Nuevo</a>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Variedad</label>
+                        <select class="form-control" th:field="*{variedad}">
+                            <option value=""> -----------Seleccione una variedad del vino------------- </option>
+                            <option th:each="variedad : ${T(com.marcos.proyectofinal.enumeracion.Variedad).values()}" th:value="${variedad}"
+                                    th:text="${variedad}"></option>
+                        </select>
+                    </div>
+                    <br>
+                    <button type="submit" class="btn btn-primary">Enviar registro</button>
+                </div>
+                <br> 
+            </form>
+        </div>
+    </master>
+    <div th:replace="/fragments/editarPerfilUsuarioModal"></div>
+    <div th:replace="/fragments/bootjs"></div>
+    <footer th:replace="/fragments/footer"></footer>
+</body>
 </html>
